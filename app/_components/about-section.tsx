@@ -4,7 +4,6 @@ import { motion } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { BubbleSection } from "@/components/bubble-effects";
 import {
   Code2,
   Database,
@@ -87,15 +86,7 @@ const AboutSection = () => {
   ];
 
   return (
-    <section id="about" className="py-32 bg-background relative overflow-hidden">
-      <BubbleSection 
-        bubbleCount={15}
-        enableTextInversion={false}
-      >
-        {/* Enhanced Background Effects */}
-        <div className="absolute inset-0 neural-network opacity-30"></div>
-        <div className="absolute inset-0 robotic-grid opacity-20"></div>
-        
+    <section id="about" className="py-32 relative overflow-hidden">
         <div className="container mx-auto px-6 relative z-10">
         {/* Section Header */}
         <motion.div
@@ -335,7 +326,6 @@ const AboutSection = () => {
           </div>
         </motion.div>
         </div>
-      </BubbleSection>
     </section>
   );
 };
