@@ -207,12 +207,11 @@ const AboutSection = () => {
                   >
                     <Card className="p-8 bg-card/20 backdrop-blur-xl border border-primary/20 hover:border-primary/60 transition-all duration-500 hover:shadow-lg cursor-pointer group hover-through">
                       <CardContent className="p-0 relative overflow-hidden">
-                        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/5 opacity-0 group-hover:opacity-100 transition-all duration-500"></div>
+                        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/5 opacity-0 transition-all duration-500"></div>
                         
                         <div className="flex items-start space-x-6 relative z-10">
                           <div className="flex-shrink-0">
                             <motion.div
-                              whileHover={{ rotate: 360, scale: 1.2 }}
                               transition={{ duration: 0.6 }}
                               className="w-16 h-16 bg-gradient-to-br from-primary via-purple-600 to-accent rounded-xl flex items-center justify-center transition-all duration-300 shadow-lg"
                             >

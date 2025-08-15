@@ -6,7 +6,6 @@ import {
   Github,
   Linkedin,
   Mail,
-  Phone,
   MapPin,
   Heart,
   ArrowUp,
@@ -114,7 +113,7 @@ const Footer = () => {
               </h3>
               <p className="text-muted-foreground leading-relaxed">
                 Full-Stack Developer passionate about creating innovative digital solutions 
-                that make a difference. Let's build the future together.
+                that make a difference. Let&apos;s build the future together.
               </p>
             </div>
 

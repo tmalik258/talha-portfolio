@@ -19,7 +19,7 @@ const HeroSection = () => {
   };
 
   return (
-    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden mt-16 lg:mt-0">
       {/* Background Grid */}
       <div className="absolute inset-0 grid-pattern opacity-20" />
       
