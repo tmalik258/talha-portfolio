@@ -1,26 +1,578 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@100;200;300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
 @import "tailwindcss";
+@import "tw-animate-css";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@custom-variant dark (&:is(.dark *));
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+:root {
+  --radius: 0.625rem;
+  /* Enhanced Futuristic Dark Theme - Light Mode */
+  --background: oklch(0.05 0.02 270); /* Deep space black */
+  --foreground: oklch(0.95 0.05 285); /* Bright cyan-purple */
+  --card: oklch(0.08 0.03 270); /* Dark card background */
+  --card-foreground: oklch(0.95 0.05 285);
+  --popover: oklch(0.08 0.03 270);
+  --popover-foreground: oklch(0.95 0.05 285);
+  --primary: oklch(0.75 0.35 285); /* Vibrant electric purple */
+  --primary-foreground: oklch(0.05 0.02 270);
+  --secondary: oklch(0.18 0.08 270); /* Enhanced dark purple */
+  --secondary-foreground: oklch(0.95 0.05 285);
+  --muted: oklch(0.15 0.04 270);
+  --muted-foreground: oklch(0.65 0.12 285);
+  --accent: oklch(0.8 0.3 300); /* Neon cyan-purple */
+  --accent-foreground: oklch(0.05 0.02 270);
+  --destructive: oklch(0.65 0.3 15);
+  --border: oklch(0.25 0.08 270);
+  --input: oklch(0.18 0.06 270);
+  --ring: oklch(0.75 0.35 285);
+  --chart-1: oklch(0.75 0.35 285);
+  --chart-2: oklch(0.65 0.3 300);
+  --chart-3: oklch(0.55 0.25 315);
+  --chart-4: oklch(0.85 0.25 270);
+  --chart-5: oklch(0.9 0.2 255);
+  --sidebar: oklch(0.08 0.03 270);
+  --sidebar-foreground: oklch(0.95 0.05 285);
+  --sidebar-primary: oklch(0.75 0.35 285);
+  --sidebar-primary-foreground: oklch(0.05 0.02 270);
+  --sidebar-accent: oklch(0.15 0.04 270);
+  --sidebar-accent-foreground: oklch(0.95 0.05 285);
+  --sidebar-border: oklch(0.25 0.08 270);
+  --sidebar-ring: oklch(0.75 0.35 285);
+}
+
+.dark {
+  /* Ultra Dark Futuristic Theme */
+  --background: oklch(0.03 0.01 270); /* Almost black with purple tint */
+  --foreground: oklch(0.98 0.08 285); /* Bright electric white-purple */
+  --card: oklch(0.06 0.02 270); /* Slightly lighter dark */
+  --card-foreground: oklch(0.98 0.08 285);
+  --popover: oklch(0.06 0.02 270);
+  --popover-foreground: oklch(0.98 0.08 285);
+  --primary: oklch(0.8 0.4 285); /* Ultra vibrant electric purple */
+  --primary-foreground: oklch(0.03 0.01 270);
+  --secondary: oklch(0.12 0.06 270); /* Deep purple-gray */
+  --secondary-foreground: oklch(0.98 0.08 285);
+  --muted: oklch(0.1 0.03 270);
+  --muted-foreground: oklch(0.7 0.15 285);
+  --accent: oklch(0.85 0.35 300); /* Bright neon cyan */
+  --accent-foreground: oklch(0.03 0.01 270);
+  --destructive: oklch(0.7 0.35 15);
+  --border: oklch(0.2 0.06 270);
+  --input: oklch(0.12 0.04 270);
+  --ring: oklch(0.8 0.4 285);
+  --chart-1: oklch(0.8 0.4 285);
+  --chart-2: oklch(0.7 0.35 300);
+  --chart-3: oklch(0.6 0.3 315);
+  --chart-4: oklch(0.9 0.3 270);
+  --chart-5: oklch(0.95 0.25 255);
+  --sidebar: oklch(0.06 0.02 270);
+  --sidebar-foreground: oklch(0.98 0.08 285);
+  --sidebar-primary: oklch(0.8 0.4 285);
+  --sidebar-primary-foreground: oklch(0.03 0.01 270);
+  --sidebar-accent: oklch(0.1 0.03 270);
+  --sidebar-accent-foreground: oklch(0.98 0.08 285);
+  --sidebar-border: oklch(0.2 0.06 270);
+  --sidebar-ring: oklch(0.8 0.4 285);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Space Grotesk', 'Inter', system-ui, sans-serif;
+    overflow-x: hidden;
+  }
+  
+  /* Enhanced Typography */
+  .font-heading {
+    font-family: 'Orbitron', 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+  }
+  
+  .font-mono {
+    font-family: 'JetBrains Mono', 'Courier New', monospace;
+  }
+  
+  .font-body {
+    font-family: 'Space Grotesk', 'Inter', system-ui, sans-serif;
+    line-height: 1.6;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Refined Professional Animations */
+@keyframes subtle-glow {
+  0%, 100% { 
+    box-shadow: 0 0 2px oklch(0.6 0.15 285 / 0.3), 0 0 4px oklch(0.6 0.15 285 / 0.2);
+    filter: brightness(1);
+  }
+  50% { 
+    box-shadow: 0 0 4px oklch(0.6 0.15 285 / 0.4), 0 0 8px oklch(0.6 0.15 285 / 0.3);
+    filter: brightness(1.05);
+  }
+}
+
+@keyframes pulse-border {
+  0%, 100% { border-color: oklch(0.55 0.25 285); }
+  50% { border-color: oklch(0.75 0.25 300); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  33% { transform: translateY(-8px) rotate(1deg); }
+  66% { transform: translateY(-4px) rotate(-1deg); }
+}
+
+@keyframes matrix-rain {
+  0% { transform: translateY(-100vh); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { transform: translateY(100vh); opacity: 0; }
+}
+
+@keyframes scan-line {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100vw); }
+}
+
+@keyframes hologram {
+  0%, 100% { 
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  25% { 
+    opacity: 0.8;
+    transform: translateY(-2px) scale(1.01);
+  }
+  50% { 
+    opacity: 0.9;
+    transform: translateY(0) scale(0.99);
+  }
+  75% { 
+    opacity: 0.85;
+    transform: translateY(1px) scale(1.005);
+  }
+}
+
+@keyframes data-stream {
+  0% { 
+    transform: translateX(-100%) scaleX(0);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+    transform: translateX(0) scaleX(1);
+  }
+  100% {
+    transform: translateX(100%) scaleX(0);
+    opacity: 0;
+  }
+}
+
+@keyframes subtle-shift {
+  0%, 100% { 
+    transform: translate(0);
+  }
+  50% { 
+    transform: translate(0.5px, 0.5px);
+  }
+}
+
+/* Refined Utility Classes */
+.glow-effect {
+  animation: subtle-glow 3s ease-in-out infinite alternate;
+}
+
+.pulse-border {
+  animation: pulse-border 2s ease-in-out infinite;
+}
+
+.float-animation {
+  animation: float 6s ease-in-out infinite;
+}
+
+.matrix-rain {
+  animation: matrix-rain 3s linear infinite;
+}
+
+.scan-line {
+  animation: scan-line 2s linear infinite;
+}
+
+.hologram-effect {
+  animation: hologram 4s ease-in-out infinite;
+}
+
+.data-stream {
+  animation: data-stream 3s ease-in-out infinite;
+}
+
+.subtle-shift {
+  animation: subtle-shift 4s ease-in-out infinite;
+}
+
+.matrix-bg {
+  position: relative;
+  overflow: hidden;
+}
+
+.matrix-bg::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(90deg, transparent, oklch(0.7 0.3 285 / 0.1), transparent);
+  animation: scan-line 3s linear infinite;
+  pointer-events: none;
+}
+
+/* Robotic Grid Pattern */
+.grid-pattern {
+  background-image: 
+    linear-gradient(oklch(0.25 0.05 270 / 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, oklch(0.25 0.05 270 / 0.1) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+.robotic-grid {
+  background-image: 
+    linear-gradient(rgba(139, 92, 246, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(139, 92, 246, 0.05) 1px, transparent 1px);
+  background-size: 30px 30px;
+  position: relative;
+}
+
+.robotic-grid::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 50% 50%, rgba(139, 92, 246, 0.03) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+/* Refined Text Effect */
+.refined-text {
+  color: oklch(0.85 0.08 285);
+  text-shadow: 
+    0 0 2px oklch(0.6 0.15 285 / 0.4),
+    0 0 4px oklch(0.6 0.15 285 / 0.2);
+}
+
+/* Holographic Effect */
+.holographic {
+  background: linear-gradient(
+    135deg,
+    transparent 0%,
+    rgba(139, 92, 246, 0.05) 25%,
+    rgba(168, 85, 247, 0.1) 50%,
+    rgba(139, 92, 246, 0.05) 75%,
+    transparent 100%
+  );
+  background-size: 400% 400%;
+  animation: holographic 6s ease-in-out infinite;
+  position: relative;
+  overflow: hidden;
+}
+
+.holographic::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.1),
+    transparent
+  );
+  animation: data-stream 4s ease-in-out infinite;
+}
+
+@keyframes holographic {
+  0%, 100% { background-position: 0% 50%; }
+  25% { background-position: 100% 0%; }
+  50% { background-position: 100% 100%; }
+  75% { background-position: 0% 100%; }
+}
+
+.cyber-border {
+  border: 1px solid hsl(var(--border));
+  position: relative;
+  overflow: hidden;
+}
+
+.cyber-border::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    hsl(var(--primary)),
+    transparent
+  );
+  animation: scan-line 3s ease-in-out infinite;
+}
+
+.glass-effect {
+  background: rgba(255, 255, 255, 0.02);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.neural-network {
+  background-image: radial-gradient(circle at 25% 25%, rgba(139, 92, 246, 0.1) 0%, transparent 50%),
+                    radial-gradient(circle at 75% 75%, rgba(168, 85, 247, 0.1) 0%, transparent 50%),
+                    radial-gradient(circle at 50% 50%, rgba(147, 51, 234, 0.05) 0%, transparent 50%);
+  animation: hologram 8s ease-in-out infinite;
+}
+
+/* Smooth Transitions */
+* {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.smooth-transition {
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Enhanced Bubble UI and Text Inversion Effects */
+.bubble-container {
+  pointer-events: none; /* Allow clicks to pass through */
+}
+
+.bubble-interactive {
+  pointer-events: auto; /* Re-enable for specific interactive elements */
+}
+
+.text-invert {
+  mix-blend-mode: difference;
+  color: white;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  z-index: 1;
+}
+
+.text-invert-soft {
+  mix-blend-mode: overlay;
+  color: #f8fafc;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  z-index: 1;
+}
+
+.bubble-overlay {
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 5;
+  backdrop-filter: blur(0.5px);
+}
+
+/* Sophisticated bubble animations */
+@keyframes bubble-float {
+  0%, 100% {
+    transform: translateY(0px) scale(1);
+    opacity: 0.8;
+  }
+  25% {
+    transform: translateY(-10px) scale(1.02);
+    opacity: 0.9;
+  }
+  50% {
+    transform: translateY(-5px) scale(0.98);
+    opacity: 1;
+  }
+  75% {
+    transform: translateY(-15px) scale(1.01);
+    opacity: 0.85;
+  }
+}
+
+@keyframes bubble-pulse {
+  0%, 100% {
+    transform: scale(1);
+    filter: blur(0px);
+  }
+  50% {
+    transform: scale(1.05);
+    filter: blur(1px);
+  }
+}
+
+@keyframes bubble-drift {
+  0% {
+    transform: translateX(0px) rotate(0deg);
+  }
+  25% {
+    transform: translateX(5px) rotate(1deg);
+  }
+  50% {
+    transform: translateX(-3px) rotate(-0.5deg);
+  }
+  75% {
+    transform: translateX(8px) rotate(1.5deg);
+  }
+  100% {
+    transform: translateX(0px) rotate(0deg);
+  }
+}
+
+.bubble-float {
+  animation: bubble-float 8s ease-in-out infinite;
+}
+
+.bubble-pulse {
+  animation: bubble-pulse 6s ease-in-out infinite;
+}
+
+.bubble-drift {
+  animation: bubble-drift 12s linear infinite;
+}
+
+/* Interactive hover states that work through bubbles */
+.hover-through {
+  position: relative;
+  z-index: 15;
+  pointer-events: auto;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hover-through:hover {
+  transform: translateY(-2px);
+  z-index: 20;
+}
+
+/* Responsive Bubble Optimizations */
+@media (max-width: 768px) {
+  .bubble-container {
+    overflow: hidden;
+  }
+  
+  .bubble-float {
+    animation-duration: 10s; /* Slower on mobile for better performance */
+  }
+  
+  .bubble-pulse {
+    animation-duration: 8s;
+  }
+  
+  .bubble-drift {
+    animation-duration: 15s;
+  }
+  
+  .text-invert,
+  .text-invert-soft {
+    mix-blend-mode: normal; /* Disable on mobile for better readability */
+  }
+}
+
+@media (max-width: 480px) {
+  .bubble-container {
+    pointer-events: none;
+  }
+  
+  /* Reduce bubble animations on very small screens */
+  .bubble-float,
+  .bubble-pulse,
+  .bubble-drift {
+    animation-play-state: paused;
+  }
+}
+
+/* Performance optimizations */
+@media (prefers-reduced-motion: reduce) {
+  .bubble-float,
+  .bubble-pulse,
+  .bubble-drift {
+    animation: none;
+  }
+  
+  .text-invert,
+  .text-invert-soft {
+    transition: none;
+  }
+}
+
+/* High performance mode for low-end devices */
+@media (max-width: 768px) and (max-height: 1024px) {
+  .bubble-overlay {
+    backdrop-filter: none; /* Remove expensive backdrop-filter on mobile */
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: oklch(0.12 0.03 270);
+}
+
+::-webkit-scrollbar-thumb {
+  background: oklch(0.7 0.3 285);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: oklch(0.75 0.25 300);
 }
