@@ -46,8 +46,8 @@ export function AnimatedSphere() {
       // Floating animation with scroll influence
       meshRef.current.position.y = Math.sin(state.clock.elapsedTime * 0.8) * 0.2 + Math.sin(scrollY.current * 0.001) * 0.1;
       
-      // Scale animation with scroll
-      const baseScale = 2.5;
+      // Scale animation with scroll and mobile adjustment
+      const baseScale = window.innerWidth > 768 ? 2.5 : 1.8; // Smaller scale for mobile
       const scrollScale = Math.sin(scrollY.current * 0.002) * 0.3;
       meshRef.current.scale.setScalar(baseScale + scrollScale);
     }
@@ -56,12 +56,12 @@ export function AnimatedSphere() {
   return (
     <Sphere ref={meshRef} args={[1, 32, 32]} scale={2.5} position={[0, 0, 0]}>
       <MeshDistortMaterial
-        color="#fff"
+        color="#ffffff"
         attach="material"
         distort={0.4}
         speed={1.5}
         roughness={0.3}
-        metalness={0.85}
+        metalness={0.87}
         opacity={0.8}
         transparent={true}
         clearcoat={0.5}

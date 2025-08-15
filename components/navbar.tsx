@@ -152,9 +152,9 @@ const Navigation = () => {
           <motion.div
             initial={{ opacity: 0, x: "100%", scale: 0.95 }}
             animate={{ opacity: 1, x: 0, scale: 1 }}
-            exit={{ opacity: 0, x: "100%", scale: 0.95 }}
+            exit={{ opacity: 0, x: "100%", transition: { duration: 0.3, ease: "easeOut" } }}
             transition={{ type: "spring", damping: 25, stiffness: 200, duration: 0.4 }}
-            className="fixed inset-y-0 right-0 z-50 w-full max-w-sm bg-background/98 backdrop-blur-xl border-l border-primary/20 shadow-2xl shadow-primary/10 md:hidden neural-network"
+            className="fixed inset-y-0 right-0 z-50 w-full max-w-sm bg-background/98 backdrop-blur-xl border-l border-primary/20 shadow-2xl shadow-primary/10 md:hidden neural-network overflow-y-auto"
           >
             <div className="flex flex-col h-full">
               {/* Enhanced Mobile Header */}

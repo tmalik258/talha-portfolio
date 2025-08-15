@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
 import { motion } from "framer-motion";
+import { SkillCard } from "./skill-card";
 import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
   Code2,
@@ -283,44 +283,8 @@ const AboutSection = () => {
 
           <div className="grid md:grid-cols-2 gap-8">
             {skills.map((skill, index) => {
-              const Icon = skill.icon;
-              return (
-                <motion.div 
-                  key={index} 
-                  initial={{ opacity: 0, scale: 0.5, rotateY: 90 }}
-                  whileInView={{ opacity: 1, scale: 1, rotateY: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: index * 0.1, ease: "easeOut" }}
-                  whileHover={{ scale: 1.05, y: -10, rotateX: 5 }}
-                  className="group"
-                >
-                  <Card className="p-8 h-full bg-card/30 backdrop-blur-xl border border-primary/20 hover:border-primary/50 transition-all duration-500 hover:shadow-lg cursor-pointer">
-                    <CardContent className="p-0">
-                      <div className="flex items-center space-x-4 mb-8">
-                        <div className={`w-16 h-16 bg-gradient-to-br ${skill.color} rounded-xl flex items-center justify-center transition-all duration-300 shadow-lg`}>
-                          <Icon className="w-8 h-8 text-white group-hover:scale-110 transition-transform duration-300" />
-                        </div>
-                        <div>
-                          <h4 className="text-2xl font-heading font-bold group-hover:text-primary transition-all duration-300">{skill.category}</h4>
-                          <p className="font-mono text-sm text-muted-foreground">{skill.technologies.length} technologies</p>
-                        </div>
-                      </div>
-                      
-                      <div className="flex flex-wrap gap-2">
-                        {skill.technologies.map((tech, techIndex) => (
-                          <Badge
-                            key={techIndex}
-                            variant="secondary"
-                            className="hover:bg-primary/20 hover:text-primary transition-colors cursor-pointer"
-                          >
-                            {tech}
-                          </Badge>
-                        ))}
-                      </div>
-                    </CardContent>
-                  </Card>
-                </motion.div>
-              );
+
+              return <SkillCard key={index} skill={skill} index={index} />;
             })}
           </div>
         </motion.div>
