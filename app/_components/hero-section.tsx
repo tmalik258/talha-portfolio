@@ -1,10 +1,11 @@
 "use client";
 
-import { useEffect } from "react";
+import React, { useEffect, useCallback, useMemo } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ArrowDown, Download, Play } from "lucide-react";
 import { SceneCanvas } from "@/components/3d/scene-canvas";
+import { HeroRobotScene } from "@/components/3d/hero-robot-scene";
 
 const HeroSection = () => {
   useEffect(() => {
@@ -13,10 +14,64 @@ const HeroSection = () => {
       document.body.style.overflowX = '';
     };
   }, []);
-  const scrollToNext = () => {
+  const scrollToNext = useCallback(() => {
     const nextSection = document.getElementById("about");
     nextSection?.scrollIntoView({ behavior: "smooth" });
-  };
+  }, []);
+
+  const scrollToProjects = useCallback(() => {
+    document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" });
+  }, []);
+
+  // Memoize animation variants to prevent recreation
+  const leftContentVariants = useMemo(() => ({
+    initial: { opacity: 0, x: -50 },
+    whileInView: { opacity: 1, x: 0 },
+    transition: { duration: 0.8, delay: 0.2 },
+    viewport: { once: true }
+  }), []);
+
+  const greetingVariants = useMemo(() => ({
+    initial: { opacity: 0, y: 20 },
+    whileInView: { opacity: 1, y: 0 },
+    transition: { duration: 0.6, delay: 0.4 },
+    viewport: { once: true }
+  }), []);
+
+  const titleVariants = useMemo(() => ({
+    initial: { opacity: 0, y: 20 },
+    whileInView: { opacity: 1, y: 0 },
+    transition: { duration: 0.6, delay: 0.6 },
+    viewport: { once: true }
+  }), []);
+
+  const ctaVariants = useMemo(() => ({
+    initial: { opacity: 0, y: 20 },
+    whileInView: { opacity: 1, y: 0 },
+    transition: { duration: 0.6, delay: 0.8 },
+    viewport: { once: true }
+  }), []);
+
+  const statsVariants = useMemo(() => ({
+    initial: { opacity: 0, y: 20 },
+    whileInView: { opacity: 1, y: 0 },
+    transition: { duration: 0.6, delay: 1 },
+    viewport: { once: true }
+  }), []);
+
+  const rightContentVariants = useMemo(() => ({
+    initial: { opacity: 0, x: 50 },
+    whileInView: { opacity: 1, x: 0 },
+    transition: { duration: 0.8, delay: 0.4 },
+    viewport: { once: true }
+  }), []);
+
+  const scrollIndicatorVariants = useMemo(() => ({
+    initial: { opacity: 0, y: 20 },
+    whileInView: { opacity: 1, y: 0 },
+    transition: { duration: 0.6, delay: 1.2 },
+    viewport: { once: true }
+  }), []);
 
   return (
     <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden mt-16 lg:mt-0">
@@ -34,16 +89,12 @@ const HeroSection = () => {
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Left Content */}
           <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
+            {...leftContentVariants}
             className="space-y-8"
           >
             {/* Greeting */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
+              {...greetingVariants}
               className="space-y-2"
             >
               <p className="text-primary font-medium text-lg tracking-wide">
@@ -57,9 +108,7 @@ const HeroSection = () => {
 
             {/* Title */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.6 }}
+              {...titleVariants}
               className="space-y-4"
             >
               <h2 className="text-2xl md:text-3xl font-semibold text-muted-foreground text-invert">
@@ -74,15 +123,13 @@ const HeroSection = () => {
 
             {/* CTA Buttons */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.8 }}
+              {...ctaVariants}
               className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
             >
               <Button
                 size="lg"
                 className="group cursor-pointer hover:scale-105 transition-transform hover-through"
-                onClick={() => document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" })}
+                onClick={scrollToProjects}
               >
                 <Play className="w-4 h-4 mr-2 group-hover:animate-pulse" />
                 View My Work
@@ -102,9 +149,7 @@ const HeroSection = () => {
 
             {/* Stats */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 1 }}
+              {...statsVariants}
               className="grid grid-cols-3 gap-8 pt-8 border-t border-border/50"
             >
               {[
@@ -124,24 +169,22 @@ const HeroSection = () => {
             </motion.div>
           </motion.div>
 
-          {/* Right Content - 3D Visualization Space */}
+          {/* Right Content - 3D Robot Model */}
           <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
+            {...rightContentVariants}
             className="relative h-96 lg:h-[500px] hidden lg:block"
           >
-            {/* This space is reserved for the 3D canvas background */}
-            <div className="absolute inset-0 rounded-2xl border border-primary/20 bg-gradient-to-br from-primary/5 to-purple-600/5 backdrop-blur-sm" />
+            {/* 3D Robot Model Container */}
+            <div className="absolute inset-0 rounded-2xl border border-primary/20 bg-gradient-to-br from-primary/5 to-purple-600/5 backdrop-blur-sm overflow-hidden">
+              <HeroRobotScene />
+            </div>
           </motion.div>
         </div>
       </div>
 
       {/* Scroll Indicator */}
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: 1.2 }}
+        {...scrollIndicatorVariants}
         className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20"
       >
         <Button
@@ -166,4 +209,4 @@ const HeroSection = () => {
   );
 };
 
-export default HeroSection;
+export default React.memo(HeroSection);

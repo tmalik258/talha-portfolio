@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import React, { useState, useCallback, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -36,7 +36,60 @@ interface Project {
 }
 
 const ProjectsSection = () => {
-  const [selectedCategory, setSelectedCategory] = useState<string>("all");
+  const [selectedCategory, setSelectedCategory] = useState("All");
+
+  // Memoize animation variants
+  const containerVariants = useMemo(() => ({
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+        delayChildren: 0.2
+      }
+    }
+  }), []);
+
+  const titleVariants = useMemo(() => ({
+    initial: { opacity: 0, y: 20 },
+    animate: { opacity: 1, y: 0 },
+    transition: { duration: 0.6, delay: 0.2 }
+  }), []);
+
+  const filterVariants = useMemo(() => ({
+    initial: { opacity: 0, y: 20 },
+    animate: { opacity: 1, y: 0 },
+    transition: { duration: 0.6, delay: 0.4 }
+  }), []);
+
+  const gridVariants = useMemo(() => ({
+    initial: { opacity: 0 },
+    animate: { opacity: 1 },
+    transition: { duration: 0.6, delay: 0.6 }
+  }), []);
+
+  const cardVariants = useMemo(() => ({
+    initial: { opacity: 0, y: 20 },
+    animate: { opacity: 1, y: 0 },
+    exit: { opacity: 0, y: -20 },
+    transition: { duration: 0.4 }
+  }), []);
+
+  const itemVariants = useMemo(() => ({
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.6,
+      },
+    },
+  }), []);
+
+  // Memoize filter handler
+  const handleCategoryChange = useCallback((category: string) => {
+    setSelectedCategory(category);
+  }, []);
   const [selectedType, setSelectedType] = useState<string>("all");
 
   // Sample projects data - In a real app, this would come from APIs
@@ -158,28 +211,8 @@ const ProjectsSection = () => {
 
   const featuredProjects = projects.filter((project) => project.featured);
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.6,
-      },
-    },
-  };
-
-  const getStatusColor = (status: string) => {
+  // Memoize utility function
+  const getStatusColor = useCallback((status: string) => {
     switch (status) {
       case "completed":
         return "bg-green-500/20 text-green-400 border-green-500/30";
@@ -190,7 +223,7 @@ const ProjectsSection = () => {
       default:
         return "bg-gray-500/20 text-gray-400 border-gray-500/30";
     }
-  };
+  }, []);
 
   return (
     <section id="projects" className="py-20 relative overflow-hidden">
@@ -201,10 +234,9 @@ const ProjectsSection = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          {...titleVariants}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-5xl font-bold mb-4">
@@ -329,7 +361,7 @@ const ProjectsSection = () => {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
           className="mb-12"
         >
           <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
@@ -348,7 +380,7 @@ const ProjectsSection = () => {
                       key={category.id}
                       variant={selectedCategory === category.id ? "default" : "outline"}
                       size="sm"
-                      onClick={() => setSelectedCategory(category.id)}
+                      onClick={() => handleCategoryChange(category.id)}
                       className="cursor-pointer"
                     >
                       <Icon className="w-4 h-4 mr-2" />
@@ -379,13 +411,14 @@ const ProjectsSection = () => {
         {/* Projects Grid */}
         <AnimatePresence mode="wait">
           <motion.div
-            key={`${selectedCategory}-${selectedType}`}
-            variants={containerVariants}
-            initial="hidden"
-            animate="visible"
-            exit="hidden"
-            className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
-          >
+          key={`${selectedCategory}-${selectedType}`}
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          exit="hidden"
+          className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
+        >
             {filteredProjects.map((project) => (
               <motion.div
                 key={project.id}
@@ -496,4 +529,4 @@ const ProjectsSection = () => {
   );
 };
 
-export default ProjectsSection;
+export default React.memo(ProjectsSection);

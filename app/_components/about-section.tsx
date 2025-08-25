@@ -1,5 +1,6 @@
 'use client';
 
+ import React, { useMemo } from "react";
 import { motion } from "framer-motion";
 import { SkillCard } from "./skill-card";
 import { Card, CardContent } from "@/components/ui/card";
@@ -19,6 +20,64 @@ import {
 } from "lucide-react";
 
 const AboutSection = () => {
+  // Memoize animation variants to prevent recreation
+  const containerVariants = useMemo(() => ({
+    initial: { opacity: 0 },
+    animate: { opacity: 1 },
+    transition: { duration: 0.6 }
+  }), []);
+
+  const titleVariants = useMemo(() => ({
+    initial: { opacity: 0, y: 20 },
+    animate: { opacity: 1, y: 0 },
+    transition: { duration: 0.6, delay: 0.2 }
+  }), []);
+
+  const descriptionVariants = useMemo(() => ({
+    initial: { opacity: 0, y: 20 },
+    animate: { opacity: 1, y: 0 },
+    transition: { duration: 0.6, delay: 0.4 }
+  }), []);
+
+  const skillsVariants = useMemo(() => ({
+    initial: { opacity: 0, y: 20 },
+    animate: { opacity: 1, y: 0 },
+    transition: { duration: 0.6, delay: 0.6 }
+  }), []);
+
+  const skillItemVariants = useMemo(() => ({
+    initial: { opacity: 0, scale: 0.8 },
+    animate: { opacity: 1, scale: 1 },
+    transition: { duration: 0.4 }
+  }), []);
+
+  const headerVariants = useMemo(() => ({
+    initial: { opacity: 0, y: 30 },
+    whileInView: { opacity: 1, y: 0 },
+    transition: { duration: 0.6 },
+    viewport: { once: true }
+  }), []);
+
+  const badgeVariants = useMemo(() => ({
+    initial: { scale: 0.5, opacity: 0 },
+    whileInView: { scale: 1, opacity: 1 },
+    transition: { delay: 0.2, duration: 0.6 },
+    viewport: { once: true }
+  }), []);
+
+  const subtitleVariants = useMemo(() => ({
+    initial: { opacity: 0, y: 20 },
+    whileInView: { opacity: 1, y: 0 },
+    transition: { delay: 0.4, duration: 0.6 },
+    viewport: { once: true }
+  }), []);
+
+  const storyVariants = useMemo(() => ({
+    initial: { opacity: 0, x: -50 },
+    whileInView: { opacity: 1, x: 0 },
+    viewport: { once: true },
+    transition: { duration: 0.8 }
+  }), []);
   const skills = [
     {
       category: "Frontend Development",
@@ -86,21 +145,15 @@ const AboutSection = () => {
   ];
 
   return (
-    <section id="about" className="py-32 relative overflow-hidden">
+    <motion.section id="about" className="py-32 relative overflow-hidden" {...containerVariants}>
         <div className="container mx-auto px-6 relative z-10">
         {/* Section Header */}
         <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          viewport={{ once: true }}
+          {...headerVariants}
           className="text-center mb-20"
         >
           <motion.div
-            initial={{ scale: 0.5, opacity: 0 }}
-            whileInView={{ scale: 1, opacity: 1 }}
-            transition={{ delay: 0.2, duration: 0.6 }}
-            viewport={{ once: true }}
+            {...badgeVariants}
             className="inline-flex items-center space-x-2 mb-6 px-4 py-2 rounded-full bg-primary/10 border border-primary/20"
           >
             <Brain className="w-5 h-5 text-primary" />
@@ -111,10 +164,7 @@ const AboutSection = () => {
             About Me
           </h2>
           <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4, duration: 0.6 }}
-            viewport={{ once: true }}
+            {...subtitleVariants}
             className="text-xl md:text-2xl text-muted-foreground max-w-4xl mx-auto font-body leading-relaxed"
           >
             Passionate <span className="text-primary font-semibold">full-stack developer</span> and AI specialist with a mission to create
@@ -126,10 +176,7 @@ const AboutSection = () => {
         <div className="grid lg:grid-cols-2 gap-16 items-start mb-20">
           {/* Personal Story */}
           <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
+            {...storyVariants}
             className="space-y-6"
           >
             <Card className="p-8 border-primary/20 hover:border-primary/40 transition-all duration-300 bg-gradient-to-br from-primary/5 to-purple-600/5 backdrop-blur-sm hover-through">
@@ -289,8 +336,8 @@ const AboutSection = () => {
           </div>
         </motion.div>
         </div>
-    </section>
+    </motion.section>
   );
 };
 
-export default AboutSection;
+export default React.memo(AboutSection);

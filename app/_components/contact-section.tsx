@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from "react";
-import { motion } from "framer-motion";
+import React, { useState, useCallback, useMemo } from "react";
+ import { motion } from "framer-motion";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import {
@@ -47,6 +47,35 @@ const ContactSection = () => {
   const [errors, setErrors] = useState<FormErrors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle");
+
+  // Memoize animation variants
+  const containerVariants = useMemo(() => ({
+    initial: { opacity: 0 },
+    whileInView: { opacity: 1 },
+    transition: { duration: 0.6 },
+    viewport: { once: true }
+  }), []);
+
+  const titleVariants = useMemo(() => ({
+    initial: { opacity: 0, y: 20 },
+    whileInView: { opacity: 1, y: 0 },
+    transition: { duration: 0.6, delay: 0.2 },
+    viewport: { once: true }
+  }), []);
+
+  const formVariants = useMemo(() => ({
+    initial: { opacity: 0, x: -20 },
+    whileInView: { opacity: 1, x: 0 },
+    transition: { duration: 0.6, delay: 0.4 },
+    viewport: { once: true }
+  }), []);
+
+  const contactInfoVariants = useMemo(() => ({
+    initial: { opacity: 0, x: 20 },
+    whileInView: { opacity: 1, x: 0 },
+    transition: { duration: 0.6, delay: 0.6 },
+    viewport: { once: true }
+  }), []);
 
   const contactInfo = [
     {
@@ -119,7 +148,7 @@ const ContactSection = () => {
     "Flexible",
   ];
 
-  const validateForm = (): boolean => {
+  const validateForm = useCallback((): boolean => {
     const newErrors: FormErrors = {};
 
     if (!formData.name.trim()) {
@@ -144,9 +173,9 @@ const ContactSection = () => {
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
-  };
+  }, [formData]);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = useCallback(async (e: React.FormEvent) => {
     e.preventDefault();
     
     if (!validateForm()) return;
@@ -175,17 +204,17 @@ const ContactSection = () => {
     } finally {
       setIsSubmitting(false);
     }
-  };
+  }, [formData, validateForm]);
 
-  const handleInputChange = (field: keyof FormData, value: string) => {
+  const handleInputChange = useCallback((field: keyof FormData, value: string) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
     if (errors[field as keyof FormErrors]) {
       setErrors((prev) => ({ ...prev, [field]: undefined }));
     }
-  };
+  }, [errors]);
 
   return (
-    <section id="contact" className="py-20 relative overflow-hidden">
+    <motion.section id="contact" className="py-20 relative overflow-hidden" {...containerVariants}>
       {/* Background Elements */}
       <div className="absolute inset-0 grid-pattern opacity-10" />
       <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary to-transparent" />
@@ -193,10 +222,9 @@ const ContactSection = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          {...titleVariants}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-5xl font-bold mb-4">
@@ -212,10 +240,9 @@ const ContactSection = () => {
         <div className="grid lg:grid-cols-2 gap-16">
           {/* Contact Information */}
           <motion.div
-            initial={{ opacity: 0, x: -50 }}
+            {...contactInfoVariants}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
             className="space-y-8"
           >
             {/* Contact Details */}
@@ -322,10 +349,9 @@ const ContactSection = () => {
 
           {/* Contact Form */}
           <motion.div
-            initial={{ opacity: 0, x: 50 }}
+            {...formVariants}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
           >
             <Card className="p-8 border-primary/20 hover:border-primary/40 transition-all duration-300">
               <CardHeader className="p-0 mb-6">
@@ -500,8 +526,8 @@ const ContactSection = () => {
           </motion.div>
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 };
 
-export default ContactSection;
+export default React.memo(ContactSection);

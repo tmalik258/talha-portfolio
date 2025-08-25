@@ -25,10 +25,10 @@ export function SkillCard({ skill, index }: SkillCardProps) {
   return (
     <motion.div
       key={index}
-      initial={{ opacity: 0, y: 50, scale: 0.9 }}
+      initial={{ opacity: 0, y: 30, scale: 0.8 }}
       whileInView={{ opacity: 1, y: 0, scale: 1 }}
-      viewport={{ once: true, amount: 0.3 }}
-      transition={{ duration: 0.8, delay: index * 0.1, ease: "easeOut" }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.6, delay: index * 0.1 }}
       style={{ y: y }}
       whileHover={{ scale: 1.05, rotateX: 5 }}
       className="group relative"

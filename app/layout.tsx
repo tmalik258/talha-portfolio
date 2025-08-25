@@ -4,6 +4,7 @@ import "./globals.css";
 import { BubbleCursor } from "@/components/bubble-effects";
 import Footer from "@/components/footer";
 import Navbar from "@/components/navbar";
+import Loader from "@/components/loader";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -48,6 +49,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <Loader />
         <Navbar />
         {children}
         <BubbleCursor />
