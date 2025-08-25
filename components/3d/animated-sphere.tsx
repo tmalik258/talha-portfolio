@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import { useFrame } from "@react-three/fiber";
 import { Sphere, MeshDistortMaterial } from "@react-three/drei";
 import * as THREE from "three";
@@ -10,6 +10,8 @@ export function AnimatedSphere() {
   const meshRef = useRef<THREE.Mesh>(null);
   const scrollY = useRef(0);
   const mousePosition = useRef({ x: 0, y: 0 });
+  const [isMobile, setIsMobile] = useState(false);
+  const [isLargeScreen, setIsLargeScreen] = useState(true);
   
   useEffect(() => {
     const handleScroll = () => {
@@ -23,11 +25,21 @@ export function AnimatedSphere() {
       };
     };
     
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+      setIsLargeScreen(window.innerWidth > 1024);
+    };
+    
+    // Initial check
+    handleResize();
+    
     window.addEventListener('scroll', handleScroll);
     window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('resize', handleResize);
     return () => {
       window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('resize', handleResize);
     };
   }, []);
 
@@ -41,13 +53,13 @@ export function AnimatedSphere() {
       meshRef.current.rotation.y += 0.005 + mousePosition.current.x * mouseInfluence * 0.5;
       
       // Adjust Z position to bring sphere closer and make it more visible
-      meshRef.current.position.z = window.innerWidth > 1024 ? -1 : 0;
+      meshRef.current.position.z = isLargeScreen ? -1 : 0;
       
       // Floating animation with scroll influence
       meshRef.current.position.y = Math.sin(state.clock.elapsedTime * 0.8) * 0.2 + Math.sin(scrollY.current * 0.001) * 0.1;
       
       // Scale animation with scroll and mobile adjustment
-      const baseScale = window.innerWidth > 768 ? 2.5 : 1.8; // Smaller scale for mobile
+      const baseScale = isMobile ? 1.8 : 2.5; // Smaller scale for mobile
       const scrollScale = Math.sin(scrollY.current * 0.002) * 0.3;
       meshRef.current.scale.setScalar(baseScale + scrollScale);
     }

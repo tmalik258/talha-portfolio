@@ -6,14 +6,18 @@ import { Button } from "@/components/ui/button";
 import { ArrowDown, Download, Play } from "lucide-react";
 import { SceneCanvas } from "@/components/3d/scene-canvas";
 import { HeroRobotScene } from "@/components/3d/hero-robot-scene";
+import { useLoading } from "@/lib/loading-context";
 
 const HeroSection = () => {
+  const { isLoading } = useLoading();
+  
   useEffect(() => {
     document.body.style.overflowX = 'hidden';
     return () => {
       document.body.style.overflowX = '';
     };
   }, []);
+  
   const scrollToNext = useCallback(() => {
     const nextSection = document.getElementById("about");
     nextSection?.scrollIntoView({ behavior: "smooth" });
@@ -23,55 +27,48 @@ const HeroSection = () => {
     document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" });
   }, []);
 
-  // Memoize animation variants to prevent recreation
+  // Memoize animation variants based on loading state
   const leftContentVariants = useMemo(() => ({
     initial: { opacity: 0, x: -50 },
-    whileInView: { opacity: 1, x: 0 },
-    transition: { duration: 0.8, delay: 0.2 },
-    viewport: { once: true }
-  }), []);
+    animate: !isLoading ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 },
+    transition: { duration: 0.8, delay: 0.2, ease: "easeOut" as const }
+  }), [isLoading]);
 
   const greetingVariants = useMemo(() => ({
     initial: { opacity: 0, y: 20 },
-    whileInView: { opacity: 1, y: 0 },
-    transition: { duration: 0.6, delay: 0.4 },
-    viewport: { once: true }
-  }), []);
+    animate: !isLoading ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 },
+    transition: { duration: 0.6, delay: 0.4, ease: "easeOut" as const }
+  }), [isLoading]);
 
   const titleVariants = useMemo(() => ({
     initial: { opacity: 0, y: 20 },
-    whileInView: { opacity: 1, y: 0 },
-    transition: { duration: 0.6, delay: 0.6 },
-    viewport: { once: true }
-  }), []);
+    animate: !isLoading ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 },
+    transition: { duration: 0.6, delay: 0.6, ease: "easeOut" as const }
+  }), [isLoading]);
 
   const ctaVariants = useMemo(() => ({
     initial: { opacity: 0, y: 20 },
-    whileInView: { opacity: 1, y: 0 },
-    transition: { duration: 0.6, delay: 0.8 },
-    viewport: { once: true }
-  }), []);
+    animate: !isLoading ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 },
+    transition: { duration: 0.6, delay: 0.8, ease: "easeOut" as const }
+  }), [isLoading]);
 
   const statsVariants = useMemo(() => ({
     initial: { opacity: 0, y: 20 },
-    whileInView: { opacity: 1, y: 0 },
-    transition: { duration: 0.6, delay: 1 },
-    viewport: { once: true }
-  }), []);
+    animate: !isLoading ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 },
+    transition: { duration: 0.6, delay: 1, ease: "easeOut" as const }
+  }), [isLoading]);
 
   const rightContentVariants = useMemo(() => ({
     initial: { opacity: 0, x: 50 },
-    whileInView: { opacity: 1, x: 0 },
-    transition: { duration: 0.8, delay: 0.4 },
-    viewport: { once: true }
-  }), []);
+    animate: !isLoading ? { opacity: 1, x: 0 } : { opacity: 0, x: 50 },
+    transition: { duration: 0.8, delay: 0.4, ease: "easeOut" as const }
+  }), [isLoading]);
 
   const scrollIndicatorVariants = useMemo(() => ({
     initial: { opacity: 0, y: 20 },
-    whileInView: { opacity: 1, y: 0 },
-    transition: { duration: 0.6, delay: 1.2 },
-    viewport: { once: true }
-  }), []);
+    animate: !isLoading ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 },
+    transition: { duration: 0.6, delay: 1.2, ease: "easeOut" as const }
+  }), [isLoading]);
 
   return (
     <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden mt-16 lg:mt-0">
@@ -196,7 +193,17 @@ const HeroSection = () => {
           <span className="text-sm text-muted-foreground group-hover:text-primary transition-colors text-invert">
             Scroll Down
           </span>
-          <ArrowDown className="w-5 h-5 animate-bounce text-primary bubble-float" />
+          <motion.div
+            animate={{ y: [0, 4, 0] }}
+            transition={{ 
+              repeat: Infinity, 
+              duration: 2, 
+              // ease: "linear" as const,
+              ease: "easeInOut" as const
+            }}
+          >
+            <ArrowDown className="w-5 h-5 text-primary" />
+          </motion.div>
         </Button>
       </motion.div>
 

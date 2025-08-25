@@ -39,22 +39,28 @@ const ProjectsSection = () => {
   const [selectedCategory, setSelectedCategory] = useState("All");
 
   // Memoize animation variants
-  const containerVariants = useMemo(() => ({
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.2
-      }
-    }
-  }), []);
+  const containerVariants = useMemo(
+    () => ({
+      hidden: { opacity: 0 },
+      visible: {
+        opacity: 1,
+        transition: {
+          staggerChildren: 0.1,
+          delayChildren: 0.2,
+        },
+      },
+    }),
+    []
+  );
 
-  const titleVariants = useMemo(() => ({
-    initial: { opacity: 0, y: 20 },
-    animate: { opacity: 1, y: 0 },
-    transition: { duration: 0.6, delay: 0.2 }
-  }), []);
+  const titleVariants = useMemo(
+    () => ({
+      initial: { opacity: 0, y: 20 },
+      animate: { opacity: 1, y: 0 },
+      transition: { duration: 0.6, delay: 0.2 },
+    }),
+    []
+  );
 
   // const filterVariants = useMemo(() => ({
   //   initial: { opacity: 0, y: 20 },
@@ -75,16 +81,19 @@ const ProjectsSection = () => {
   //   transition: { duration: 0.4 }
   // }), []);
 
-  const itemVariants = useMemo(() => ({
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.6,
+  const itemVariants = useMemo(
+    () => ({
+      hidden: { opacity: 0, y: 20 },
+      visible: {
+        opacity: 1,
+        y: 0,
+        transition: {
+          duration: 0.6,
+        },
       },
-    },
-  }), []);
+    }),
+    []
+  );
 
   // Memoize filter handler
   const handleCategoryChange = useCallback((category: string) => {
@@ -97,9 +106,19 @@ const ProjectsSection = () => {
     {
       id: "1",
       title: "AI-Powered E-Commerce Platform",
-      description: "Full-stack e-commerce solution with AI-driven product recommendations and dynamic pricing.",
-      longDescription: "A comprehensive e-commerce platform built with Next.js and Python, featuring machine learning algorithms for personalized product recommendations, dynamic pricing optimization, and intelligent inventory management.",
-      technologies: ["Next.js", "Python", "TensorFlow", "PostgreSQL", "Redis", "Stripe", "AWS"],
+      description:
+        "Full-stack e-commerce solution with AI-driven product recommendations and dynamic pricing.",
+      longDescription:
+        "A comprehensive e-commerce platform built with Next.js and Python, featuring machine learning algorithms for personalized product recommendations, dynamic pricing optimization, and intelligent inventory management.",
+      technologies: [
+        "Next.js",
+        "Python",
+        "TensorFlow",
+        "PostgreSQL",
+        "Redis",
+        "Stripe",
+        "AWS",
+      ],
       category: "fullstack",
       type: "upwork",
       image: "/api/placeholder/600/400",
@@ -111,9 +130,18 @@ const ProjectsSection = () => {
     {
       id: "2",
       title: "Real-Time Chat Application",
-      description: "Modern chat app with WebSocket integration, file sharing, and end-to-end encryption.",
-      longDescription: "A secure, real-time messaging platform built with React and Node.js, featuring WebSocket connections, file sharing capabilities, message encryption, and responsive design for seamless communication.",
-      technologies: ["React", "Node.js", "Socket.io", "MongoDB", "JWT", "Cloudinary"],
+      description:
+        "Modern chat app with WebSocket integration, file sharing, and end-to-end encryption.",
+      longDescription:
+        "A secure, real-time messaging platform built with React and Node.js, featuring WebSocket connections, file sharing capabilities, message encryption, and responsive design for seamless communication.",
+      technologies: [
+        "React",
+        "Node.js",
+        "Socket.io",
+        "MongoDB",
+        "JWT",
+        "Cloudinary",
+      ],
       category: "web",
       type: "github",
       image: "/api/placeholder/600/400",
@@ -127,9 +155,18 @@ const ProjectsSection = () => {
     {
       id: "3",
       title: "Smart Home IoT Dashboard",
-      description: "IoT dashboard for monitoring and controlling smart home devices with predictive analytics.",
-      longDescription: "An intelligent IoT dashboard that connects and manages smart home devices, featuring real-time monitoring, predictive maintenance alerts, energy optimization, and intuitive control interfaces.",
-      technologies: ["React Native", "Python", "MQTT", "InfluxDB", "Grafana", "Docker"],
+      description:
+        "IoT dashboard for monitoring and controlling smart home devices with predictive analytics.",
+      longDescription:
+        "An intelligent IoT dashboard that connects and manages smart home devices, featuring real-time monitoring, predictive maintenance alerts, energy optimization, and intuitive control interfaces.",
+      technologies: [
+        "React Native",
+        "Python",
+        "MQTT",
+        "InfluxDB",
+        "Grafana",
+        "Docker",
+      ],
       category: "mobile",
       type: "upwork",
       image: "/api/placeholder/600/400",
@@ -140,9 +177,18 @@ const ProjectsSection = () => {
     {
       id: "4",
       title: "Computer Vision Image Classifier",
-      description: "Deep learning model for image classification with 95% accuracy on custom datasets.",
-      longDescription: "A sophisticated computer vision system using convolutional neural networks for multi-class image classification, featuring data augmentation, transfer learning, and model optimization techniques.",
-      technologies: ["Python", "PyTorch", "OpenCV", "FastAPI", "Docker", "MLflow"],
+      description:
+        "Deep learning model for image classification with 95% accuracy on custom datasets.",
+      longDescription:
+        "A sophisticated computer vision system using convolutional neural networks for multi-class image classification, featuring data augmentation, transfer learning, and model optimization techniques.",
+      technologies: [
+        "Python",
+        "PyTorch",
+        "OpenCV",
+        "FastAPI",
+        "Docker",
+        "MLflow",
+      ],
       category: "ai",
       type: "github",
       image: "/api/placeholder/600/400",
@@ -156,9 +202,18 @@ const ProjectsSection = () => {
     {
       id: "5",
       title: "Task Management SaaS",
-      description: "Multi-tenant task management platform with team collaboration and analytics.",
-      longDescription: "A comprehensive SaaS solution for project and task management, featuring team collaboration tools, advanced analytics, customizable workflows, and multi-tenant architecture.",
-      technologies: ["Next.js", "Prisma", "PostgreSQL", "Stripe", "Vercel", "Tailwind CSS"],
+      description:
+        "Multi-tenant task management platform with team collaboration and analytics.",
+      longDescription:
+        "A comprehensive SaaS solution for project and task management, featuring team collaboration tools, advanced analytics, customizable workflows, and multi-tenant architecture.",
+      technologies: [
+        "Next.js",
+        "Prisma",
+        "PostgreSQL",
+        "Stripe",
+        "Vercel",
+        "Tailwind CSS",
+      ],
       category: "web",
       type: "personal",
       image: "/api/placeholder/600/400",
@@ -173,9 +228,18 @@ const ProjectsSection = () => {
     {
       id: "6",
       title: "Cryptocurrency Trading Bot",
-      description: "Automated trading bot with machine learning algorithms for market prediction.",
-      longDescription: "An intelligent cryptocurrency trading bot that uses machine learning algorithms to analyze market trends, execute trades automatically, and optimize portfolio performance with risk management.",
-      technologies: ["Python", "Pandas", "Scikit-learn", "Binance API", "Redis", "Docker"],
+      description:
+        "Automated trading bot with machine learning algorithms for market prediction.",
+      longDescription:
+        "An intelligent cryptocurrency trading bot that uses machine learning algorithms to analyze market trends, execute trades automatically, and optimize portfolio performance with risk management.",
+      technologies: [
+        "Python",
+        "Pandas",
+        "Scikit-learn",
+        "Binance API",
+        "Redis",
+        "Docker",
+      ],
       category: "ai",
       type: "github",
       image: "/api/placeholder/600/400",
@@ -204,7 +268,8 @@ const ProjectsSection = () => {
   ];
 
   const filteredProjects = projects.filter((project) => {
-    const categoryMatch = selectedCategory === "all" || project.category === selectedCategory;
+    const categoryMatch =
+      selectedCategory === "all" || project.category === selectedCategory;
     const typeMatch = selectedType === "all" || project.type === selectedType;
     return categoryMatch && typeMatch;
   });
@@ -230,7 +295,7 @@ const ProjectsSection = () => {
       {/* Background Elements */}
       <div className="absolute inset-0 grid-pattern opacity-10" />
       <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary to-transparent" />
-      
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <motion.div
@@ -245,7 +310,8 @@ const ProjectsSection = () => {
           <div className="w-24 h-1 bg-gradient-to-r from-primary to-purple-600 mx-auto mb-6 glow-effect" />
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
             A showcase of innovative solutions, from AI-powered applications to
-            full-stack web platforms, demonstrating technical expertise and creative problem-solving.
+            full-stack web platforms, demonstrating technical expertise and
+            creative problem-solving.
           </p>
         </motion.div>
 
@@ -261,7 +327,7 @@ const ProjectsSection = () => {
             <Star className="w-6 h-6 text-primary mr-3" />
             Highlighted Work
           </h3>
-          
+
           <div className="grid lg:grid-cols-2 gap-8">
             {featuredProjects.slice(0, 2).map((project, index) => (
               <motion.div
@@ -279,15 +345,20 @@ const ProjectsSection = () => {
                       <Code className="w-16 h-16 text-primary/50" />
                     </div>
                     <div className="absolute top-4 right-4 flex space-x-2">
-                      <Badge className={`${getStatusColor(project.status)} border`}>
+                      <Badge
+                        className={`${getStatusColor(project.status)} border`}
+                      >
                         {project.status.replace("-", " ")}
                       </Badge>
-                      <Badge variant="secondary" className="bg-primary/20 text-primary border-primary/30">
+                      <Badge
+                        variant="secondary"
+                        className="bg-primary/20 text-primary border-primary/30"
+                      >
                         {project.type}
                       </Badge>
                     </div>
                   </div>
-                  
+
                   <CardHeader>
                     <CardTitle className="flex items-center justify-between">
                       <span className="text-xl">{project.title}</span>
@@ -305,12 +376,12 @@ const ProjectsSection = () => {
                       )}
                     </CardTitle>
                   </CardHeader>
-                  
+
                   <CardContent className="space-y-4">
                     <p className="text-muted-foreground leading-relaxed">
                       {project.longDescription || project.description}
                     </p>
-                    
+
                     <div className="flex flex-wrap gap-2">
                       {project.technologies.slice(0, 4).map((tech) => (
                         <Badge key={tech} variant="outline" className="text-xs">
@@ -323,25 +394,43 @@ const ProjectsSection = () => {
                         </Badge>
                       )}
                     </div>
-                    
+
                     <div className="flex items-center justify-between pt-4">
                       <div className="flex items-center text-sm text-muted-foreground">
                         <Calendar className="w-4 h-4 mr-2" />
                         {new Date(project.date).toLocaleDateString()}
                       </div>
-                      
+
                       <div className="flex space-x-2">
                         {project.liveUrl && (
-                          <Button size="sm" variant="outline" asChild className="cursor-pointer">
-                            <a href={project.liveUrl} target="_blank" rel="noopener noreferrer">
+                          <Button
+                            size="sm"
+                            variant="outline"
+                            asChild
+                            className="cursor-pointer"
+                          >
+                            <a
+                              href={project.liveUrl}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                            >
                               <Eye className="w-4 h-4 mr-2" />
                               Live Demo
                             </a>
                           </Button>
                         )}
                         {project.githubUrl && (
-                          <Button size="sm" variant="outline" asChild className="cursor-pointer">
-                            <a href={project.githubUrl} target="_blank" rel="noopener noreferrer">
+                          <Button
+                            size="sm"
+                            variant="outline"
+                            asChild
+                            className="cursor-pointer"
+                          >
+                            <a
+                              href={project.githubUrl}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                            >
                               <Github className="w-4 h-4 mr-2" />
                               Code
                             </a>
@@ -369,7 +458,7 @@ const ProjectsSection = () => {
               <Filter className="w-6 h-6 text-primary mr-3" />
               All Projects
             </h3>
-            
+
             <div className="flex flex-col sm:flex-row gap-4">
               {/* Category Filter */}
               <div className="flex flex-wrap gap-2">
@@ -378,7 +467,9 @@ const ProjectsSection = () => {
                   return (
                     <Button
                       key={category.id}
-                      variant={selectedCategory === category.id ? "default" : "outline"}
+                      variant={
+                        selectedCategory === category.id ? "default" : "outline"
+                      }
                       size="sm"
                       onClick={() => handleCategoryChange(category.id)}
                       className="cursor-pointer"
@@ -389,7 +480,7 @@ const ProjectsSection = () => {
                   );
                 })}
               </div>
-              
+
               {/* Type Filter */}
               <div className="flex flex-wrap gap-2">
                 {types.map((type) => (
@@ -411,14 +502,14 @@ const ProjectsSection = () => {
         {/* Projects Grid */}
         <AnimatePresence mode="wait">
           <motion.div
-          key={`${selectedCategory}-${selectedType}`}
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          exit="hidden"
-          className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
-        >
+            key={`${selectedCategory}-${selectedType}`}
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            exit="hidden"
+            className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
+          >
             {filteredProjects.map((project) => (
               <motion.div
                 key={project.id}
@@ -426,30 +517,40 @@ const ProjectsSection = () => {
                 whileHover={{ y: -5, scale: 1.02 }}
                 className="group"
               >
-               <Card className="overflow-hidden border-primary/20 hover:border-primary/40 hover:shadow-md transition-all duration-300 h-full group">
+                <Card className="overflow-hidden border-primary/20 hover:border-primary/40 hover:shadow-md transition-all duration-300 h-full group">
                   <div className="relative overflow-hidden">
                     <div className="aspect-video bg-gradient-to-br from-primary/10 to-purple-600/10 flex items-center justify-center">
                       <Code className="w-12 h-12 text-primary/40" />
                     </div>
                     <div className="absolute top-3 right-3">
-                      <Badge className={`${getStatusColor(project.status)} border text-xs`}>
+                      <Badge
+                        className={`${getStatusColor(
+                          project.status
+                        )} border text-xs`}
+                      >
                         {project.status.replace("-", " ")}
                       </Badge>
                     </div>
                   </div>
-                  
+
                   <CardHeader className="pb-3">
-                    <CardTitle className="text-lg line-clamp-2">{project.title}</CardTitle>
+                    <CardTitle className="text-lg line-clamp-2">
+                      {project.title}
+                    </CardTitle>
                   </CardHeader>
-                  
+
                   <CardContent className="space-y-4">
                     <p className="text-muted-foreground text-sm leading-relaxed line-clamp-3">
                       {project.description}
                     </p>
-                    
+
                     <div className="flex flex-wrap gap-1">
                       {project.technologies.slice(0, 3).map((tech) => (
-                        <Badge key={tech} variant="secondary" className="text-xs">
+                        <Badge
+                          key={tech}
+                          variant="secondary"
+                          className="text-xs"
+                        >
                           {tech}
                         </Badge>
                       ))}
@@ -459,24 +560,42 @@ const ProjectsSection = () => {
                         </Badge>
                       )}
                     </div>
-                    
+
                     <div className="flex items-center justify-between pt-2">
                       <div className="flex items-center text-xs text-muted-foreground">
                         <Calendar className="w-3 h-3 mr-1" />
                         {new Date(project.date).toLocaleDateString()}
                       </div>
-                      
+
                       <div className="flex space-x-1">
                         {project.liveUrl && (
-                          <Button size="sm" variant="ghost" asChild className="h-8 w-8 p-0 cursor-pointer">
-                            <a href={project.liveUrl} target="_blank" rel="noopener noreferrer">
+                          <Button
+                            size="sm"
+                            variant="ghost"
+                            asChild
+                            className="h-8 w-8 p-0 cursor-pointer"
+                          >
+                            <a
+                              href={project.liveUrl}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                            >
                               <ExternalLink className="w-4 h-4" />
                             </a>
                           </Button>
                         )}
                         {project.githubUrl && (
-                          <Button size="sm" variant="ghost" asChild className="h-8 w-8 p-0 cursor-pointer">
-                            <a href={project.githubUrl} target="_blank" rel="noopener noreferrer">
+                          <Button
+                            size="sm"
+                            variant="ghost"
+                            asChild
+                            className="h-8 w-8 p-0 cursor-pointer"
+                          >
+                            <a
+                              href={project.githubUrl}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                            >
                               <Github className="w-4 h-4" />
                             </a>
                           </Button>
@@ -501,11 +620,16 @@ const ProjectsSection = () => {
           <Card className="p-8 border-primary/20 bg-gradient-to-br from-primary/5 to-purple-600/5 backdrop-blur-sm">
             <CardContent className="p-0 space-y-6">
               <h3 className="text-2xl font-bold">
-                Interested in <span className="text-primary font-semibold">Collaborating</span>?
+                Interested in{" "}
+                <span className="text-primary font-semibold">
+                  Collaborating
+                </span>
+                ?
               </h3>
               <p className="text-muted-foreground max-w-2xl mx-auto">
-                I&apos;m always excited to work on innovative projects and bring creative ideas to life.
-                Let&apos;s discuss how we can build something amazing together.
+                I&apos;m always excited to work on innovative projects and bring
+                creative ideas to life. Let&apos;s discuss how we can build
+                something amazing together.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button size="lg" className="cursor-pointer" asChild>
@@ -514,8 +638,17 @@ const ProjectsSection = () => {
                     Start a Project
                   </a>
                 </Button>
-                <Button size="lg" variant="outline" className="cursor-pointer border-2 border-primary/20 hover:border-primary/40" asChild>
-                  <a href="https://github.com/tmalik258/" target="_blank" rel="noopener noreferrer">
+                <Button
+                  size="lg"
+                  variant="outline"
+                  className="cursor-pointer border-2 border-primary/20 hover:border-primary/40"
+                  asChild
+                >
+                  <a
+                    href="https://github.com/tmalik258/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     <Github className="w-4 h-4 mr-2" />
                     View All on GitHub
                   </a>

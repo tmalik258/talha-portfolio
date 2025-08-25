@@ -552,6 +552,25 @@
   }
 }
 
+/* Scroll performance optimizations */
+.scroll-optimized {
+  transform: translate3d(0, 0, 0);
+  -webkit-transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  perspective: 1000px;
+  -webkit-perspective: 1000px;
+  will-change: auto;
+}
+
+/* Prevent animation conflicts during scroll */
+@media (max-width: 768px) {
+  * {
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+  }
+}
+
 /* High performance mode for low-end devices */
 @media (max-width: 768px) and (max-height: 1024px) {
   .bubble-overlay {
