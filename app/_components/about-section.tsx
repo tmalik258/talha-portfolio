@@ -27,29 +27,29 @@ const AboutSection = () => {
     transition: { duration: 0.6 }
   }), []);
 
-  const titleVariants = useMemo(() => ({
-    initial: { opacity: 0, y: 20 },
-    animate: { opacity: 1, y: 0 },
-    transition: { duration: 0.6, delay: 0.2 }
-  }), []);
+  // const titleVariants = useMemo(() => ({
+  //   initial: { opacity: 0, y: 20 },
+  //   animate: { opacity: 1, y: 0 },
+  //   transition: { duration: 0.6, delay: 0.2 }
+  // }), []);
 
-  const descriptionVariants = useMemo(() => ({
-    initial: { opacity: 0, y: 20 },
-    animate: { opacity: 1, y: 0 },
-    transition: { duration: 0.6, delay: 0.4 }
-  }), []);
+  // const descriptionVariants = useMemo(() => ({
+  //   initial: { opacity: 0, y: 20 },
+  //   animate: { opacity: 1, y: 0 },
+  //   transition: { duration: 0.6, delay: 0.4 }
+  // }), []);
 
-  const skillsVariants = useMemo(() => ({
-    initial: { opacity: 0, y: 20 },
-    animate: { opacity: 1, y: 0 },
-    transition: { duration: 0.6, delay: 0.6 }
-  }), []);
+  // const skillsVariants = useMemo(() => ({
+  //   initial: { opacity: 0, y: 20 },
+  //   animate: { opacity: 1, y: 0 },
+  //   transition: { duration: 0.6, delay: 0.6 }
+  // }), []);
 
-  const skillItemVariants = useMemo(() => ({
-    initial: { opacity: 0, scale: 0.8 },
-    animate: { opacity: 1, scale: 1 },
-    transition: { duration: 0.4 }
-  }), []);
+  // const skillItemVariants = useMemo(() => ({
+  //   initial: { opacity: 0, scale: 0.8 },
+  //   animate: { opacity: 1, scale: 1 },
+  //   transition: { duration: 0.4 }
+  // }), []);
 
   const headerVariants = useMemo(() => ({
     initial: { opacity: 0, y: 30 },

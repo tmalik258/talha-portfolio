@@ -56,24 +56,24 @@ const ProjectsSection = () => {
     transition: { duration: 0.6, delay: 0.2 }
   }), []);
 
-  const filterVariants = useMemo(() => ({
-    initial: { opacity: 0, y: 20 },
-    animate: { opacity: 1, y: 0 },
-    transition: { duration: 0.6, delay: 0.4 }
-  }), []);
+  // const filterVariants = useMemo(() => ({
+  //   initial: { opacity: 0, y: 20 },
+  //   animate: { opacity: 1, y: 0 },
+  //   transition: { duration: 0.6, delay: 0.4 }
+  // }), []);
 
-  const gridVariants = useMemo(() => ({
-    initial: { opacity: 0 },
-    animate: { opacity: 1 },
-    transition: { duration: 0.6, delay: 0.6 }
-  }), []);
+  // const gridVariants = useMemo(() => ({
+  //   initial: { opacity: 0 },
+  //   animate: { opacity: 1 },
+  //   transition: { duration: 0.6, delay: 0.6 }
+  // }), []);
 
-  const cardVariants = useMemo(() => ({
-    initial: { opacity: 0, y: 20 },
-    animate: { opacity: 1, y: 0 },
-    exit: { opacity: 0, y: -20 },
-    transition: { duration: 0.4 }
-  }), []);
+  // const cardVariants = useMemo(() => ({
+  //   initial: { opacity: 0, y: 20 },
+  //   animate: { opacity: 1, y: 0 },
+  //   exit: { opacity: 0, y: -20 },
+  //   transition: { duration: 0.4 }
+  // }), []);
 
   const itemVariants = useMemo(() => ({
     hidden: { opacity: 0, y: 20 },
